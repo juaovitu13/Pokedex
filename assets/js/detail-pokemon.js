@@ -37,11 +37,11 @@ let detail = (url) => fetch(url).then((res) => res.json()).then((data) => {
 
   document.getElementById("content").innerHTML = pokemon_detail;
   document.getElementById('backButton').addEventListener('click', (e) => {
-    if (e.target) document.location.reload();
+    if(e.target) document.location.reload();
   })
 })
 
-document.getElementById('pokemonList').addEventListener("click", function (e) {
+document.getElementById('pokemonList').addEventListener("click", function(e) {
   let url = 'https://pokeapi.co/api/v2/pokemon/';
   if (e.target && e.target.matches("li.pokemon")) {
     url += e.target.children[0].innerText.slice(1);
