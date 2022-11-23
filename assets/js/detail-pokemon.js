@@ -1,16 +1,16 @@
 
 let detail = (url) => fetch(url).then((res) => res.json()).then((data) => {
 
-    let stats = data.stats.map((statistic) => {
-        return `
+  let stats = data.stats.map((statistic) => {
+    return `
       <p class="m-0"> ${statistic.stat.name}</p>
       <div class="progress mb-1">
         <div class="progress-bar" role="progressbar" style="width: ${statistic.base_stat}%;" aria-valuenow="${statistic.base_stat}" aria-valuemin="0" aria-valuemax="100">${statistic.base_stat}%</div>
       </div>
       `
-    }).join('')
+  }).join('')
 
-    let pokemon_detail = `
+  let pokemon_detail = `
     <h1>Pokedex</h1>
     <div class="card ${data.types[0].type.name} mx-auto" style="width: 25rem;">
       <img src=${data.sprites.other.dream_world.front_default} class="card-img-top mx-auto ${data.types[0].type.name} mt-4"  alt="..." style="width: 15rem;">
@@ -35,26 +35,27 @@ let detail = (url) => fetch(url).then((res) => res.json()).then((data) => {
     </div>
   `
 
-    document.getElementById("content").innerHTML = pokemon_detail;
-    document.getElementById('backButton').addEventListener('click', (e) => {
-        if (e.target) document.location.reload();
-    })
+  document.getElementById("content").innerHTML = pokemon_detail;
+  document.getElementById('backButton').addEventListener('click', (e) => {
+    if (e.target) document.location.reload();
+  })
 })
-document.getElementById('pokemonList').addEventListener("click", function (e) {
-    let url = 'https://pokeapi.co/api/v2/pokemon/';
-    if (e.target && e.target.matches("li.pokemon")) {
-        url += e.target.children[0].innerText.slice(1);
-        detail(url);
 
-    } else if (e.target && e.target.matches('div.detail')) {
-        url += e.target.parentElement.children[0].innerText.slice(1);
-        detail(url);
-    } else if (e.target && e.target.matches('span.name')) {
-        url += e.target.parentElement.children[0].innerText.slice(1);
-        detail(url);
-    } else if (e.target && e.target.matches('img')) {
-        url += e.target.parentElement.parentElement.children[0].innerText.slice(1);
-        detail(url);
-    }
+document.getElementById('pokemonList').addEventListener("click", function (e) {
+  let url = 'https://pokeapi.co/api/v2/pokemon/';
+  if (e.target && e.target.matches("li.pokemon")) {
+    url += e.target.children[0].innerText.slice(1);
+    detail(url);
+
+  } else if (e.target && e.target.matches('div.detail')) {
+    url += e.target.parentElement.children[0].innerText.slice(1);
+    detail(url);
+  } else if (e.target && e.target.matches('span.name')) {
+    url += e.target.parentElement.children[0].innerText.slice(1);
+    detail(url);
+  } else if (e.target && e.target.matches('img')) {
+    url += e.target.parentElement.parentElement.children[0].innerText.slice(1);
+    detail(url);
+  }
 
 });
